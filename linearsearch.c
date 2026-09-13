@@ -8,7 +8,9 @@ int linearSearch(int arr[], int size, int target) {
     }
     return -1; 
 }
-
+int linear(){
+    
+}
 int main() {
     int numbers[] = {10, 23, 45, 70, 11, 15};
     
