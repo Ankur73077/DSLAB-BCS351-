@@ -1,70 +1,87 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAX 100
+struct Node
+{
+    int data;
+    struct Node *next;
+};
 
-int stack[MAX];
-int top = -1;
+struct Node *top = NULL;
 
-// Push element into stack
+// Push element
 void push(int value)
 {
-    if (top == MAX - 1)
-    {
-        printf("Stack is full\n");
-    }
-    else
-    {
-        top++;
-        stack[top] = value;
+    struct Node *newnode;
 
-        printf("%d pushed into stack\n", value);
+    newnode = (struct Node*)malloc(sizeof(struct Node));
+
+    if (newnode == NULL)
+    {
+        printf("Memory not available\n");
+        return;
     }
+
+    newnode->data = value;
+    newnode->next = top;
+    top = newnode;
+
+    printf("%d pushed into stack\n", value);
 }
 
-// Remove element from stack
+// Pop element
 void pop()
 {
-    if (top == -1)
+    struct Node *temp;
+
+    if (top == NULL)
     {
         printf("Stack is empty\n");
+        return;
     }
-    else
-    {
-        printf("%d popped from stack\n", stack[top]);
-        top--;
-    }
+
+    temp = top;
+
+    printf("%d popped from stack\n", top->data);
+
+    top = top->next;
+
+    free(temp);
 }
 
 // Show top element
 void peek()
 {
-    if (top == -1)
+    if (top == NULL)
     {
         printf("Stack is empty\n");
     }
     else
     {
-        printf("Top element = %d\n", stack[top]);
+        printf("Top element = %d\n", top->data);
     }
 }
 
 // Display stack
 void display()
 {
-    int i;
+    struct Node *temp;
 
-    if (top == -1)
+    if (top == NULL)
     {
         printf("Stack is empty\n");
         return;
     }
 
+    temp = top;
+
     printf("Stack elements:\n");
 
-    for (i = top; i >= 0; i--)
+    while (temp != NULL)
     {
-        printf("%d\n", stack[i]);
+        printf("%d\n", temp->data);
+        temp = temp->next;
     }
 }
 
@@ -74,7 +91,7 @@ int main()
 
     while (1)
     {
-        printf("\n--- Stack Menu ---\n");
+        printf("\n--- Stack using Linked List ---\n");
         printf("1. Push\n");
         printf("2. Pop\n");
         printf("3. Peek\n");
@@ -116,4 +133,3 @@ int main()
 
     return 0;
 }
-
