@@ -1,19 +1,10 @@
 #include <stdio.h>
 
-// Function for binary search
-int binarySearch(int arr[], int low, int high, int key) {
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
-        
-        if (arr[mid] == key) {
-            return mid; // Element found
-        }
-        
-        if (arr[mid] < key) {
-            low = mid + 1; // Search in right half
-        } else {
-            high = mid - 1; // Search in left half
-        }
+// Function for linear search
+int linearSearch(int arr[], int n, int key) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == key)
+            return i; // Element found
     }
     return -1; // Element not found
 }
@@ -27,7 +18,7 @@ int main() {
     scanf("%d", &n);
 
     // Input array elements from user
-    printf("Enter %d sorted elements:\n", n);
+    printf("Enter %d elements:\n", n);
     for (i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
@@ -36,9 +27,9 @@ int main() {
     printf("Enter the element to search: ");
     scanf("%d", &key);
 
-    // Calling the binary search function
-    result = binarySearch(arr, 0, n - 1, key);
-    
+    // Calling the linear search function
+    result = linearSearch(arr, n, key);
+
     // Printing final output
     if (result != -1) {
         printf("\nElement %d found at index %d.\n", key, result);
@@ -48,4 +39,3 @@ int main() {
 
     return 0;
 }
-
